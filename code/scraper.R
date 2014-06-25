@@ -34,7 +34,7 @@ for (i in 1:length(clusters)) {
     write.table(as.character(e), 'temp.txt', 
                 row.names = F, col.names = F, quote = F)
     cluster <- read.table('temp.txt', header = T, strip.white = T, 
-                    fill = T, sep = ",")
+                    fill = T, sep = "\n", quote = "")
     if (i == 1) z <- cluster
     else z <- cbind.fill(z, cluster)
 }
@@ -51,12 +51,11 @@ dsID <- 'clusters'
 dataset <- data.frame(scrape_time, last_updated, dsID)
 
 # value
+value <- z
 
 # configuration
 
 
-## experimenting with regex
-sub(",.*", "", "Côte dIvoire,Democratic Republic of the Congo,Ethiopia\nGuinea\nHaiti\nIndonesia\nIraq\nMadagascar\nMali\nMozambique\nNiger\nNigeria\nPacific Region\nPakistan\nPhilippines\nSomalia\nSouth Sudan\nSudan\nYemen\nZimbabwe\n")
 
-str_extract_all("Côte dIvoire,Democratic Republic of the Congo,Ethiopia,Guinea\nHaiti\nIndonesia\nIraq\nMadagascar\nMali\nMozambique\nNiger\nNigeria\nPacific Region\nPakistan\nPhilippines\nSomalia\nSouth Sudan\nSudan\nYemen\nZimbabwe\n", ".*,")
-
+## Writing output
+write.csv(value, 'data/sample.csv' )
