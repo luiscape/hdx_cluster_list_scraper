@@ -5,15 +5,16 @@
 # views-group class for the cluster name
 # field-content class for the country that has it
 
-
 library(XML)
 library(RCurl)
-library(stringr)  # this works
+library(stringr)  # not sure if it works with ScraperWiki
 
+# base url
 url <- 'https://www.humanitarianresponse.info/clusters/countries'
 doc <- htmlTreeParse(getURL(url), useInternal = TRUE)
 clusters <- xpathApply(doc, "//div[@class='views-group']", xmlValue)
 
+# from stackoverflow
 cbind.fill<-function(...){
     nm <- list(...) 
     nm<-lapply(nm, as.matrix)
@@ -56,6 +57,5 @@ value <- z
 # configuration
 
 
-
 ## Writing output
-write.csv(value, 'data/sample.csv' )
+write.csv(value, 'data/sample.csv', row.names = F)
