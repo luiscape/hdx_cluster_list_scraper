@@ -23,6 +23,11 @@ cbind.fill<-function(...){
         rbind(x, matrix(, n-nrow(x), ncol(x))))) 
 }
 
+########################################################
+#### Get rid of the dependencies for `stringr` here.####
+########################################################
+
+
 for (i in 1:length(clusters)) {
     a <- str_replace_all(unlist(clusters[i]), "[\r\n]", "")
     b <- str_replace_all(a, "[\r\t]", "")
@@ -30,7 +35,7 @@ for (i in 1:length(clusters)) {
     d <- str_replace_all(c, "    ", "")
     e <- str_replace_all(d, "  ", "")
     f <- str_replace_all(e, "\n", ",")
-    
+
     # Writing a text file for reading the ',' as separators.
     write.table(as.character(e), 'temp.txt', 
                 row.names = F, col.names = F, quote = F)
